@@ -6,14 +6,14 @@ const offButton = document.getElementById('offButton');
 const retrievedValue = document.getElementById('valueContainer');
 const bleStateContainer = document.getElementById('bleState');
 
-const brightnessSlider = document.getElementById('brightnessSlider');
+// const brightnessSlider = document.getElementById('brightnessSlider');
 const colourSelect = document.getElementById('colourSelect');
 // const redSlider = document.getElementById('redSlider');
 // const greenSlider = document.getElementById('greenSlider');
 // const blueSlider = document.getElementById('blueSlider');
 
 var power = 0;
-var brightness = 50;
+// var brightness = 50;
 var red = 100;
 var green = 100;
 var blue = 100;
@@ -42,19 +42,19 @@ disconnectButton.addEventListener('click', disconnectDevice);
 // Write to the ESP32 LED Characteristic
 onButton.addEventListener('click', () => {
     power = 1;
-    writeOnCharacteristic(power, brightness, red, green, blue);
+    writeOnCharacteristic(power, red, green, blue);
 });
 
 offButton.addEventListener('click', () => {
     power = 0;
-    writeOnCharacteristic(power, brightness, red, green, blue);
+    writeOnCharacteristic(power, red, green, blue);
 });
 
-brightnessSlider.addEventListener('input', (event) => {
-    brightness = event.target.value;
-    console.log("brightness", brightness);
-    writeOnCharacteristic(power, brightness, red, green, blue);
-});
+// brightnessSlider.addEventListener('input', (event) => {
+//     brightness = event.target.value;
+//     console.log("brightness", brightness);
+//     writeOnCharacteristic(power, brightness, red, green, blue);
+// });
 
 // rgb
 
@@ -63,7 +63,7 @@ colourSelect.addEventListener('input', (event) => {
     red = parseInt(color.substr(1,2), 16)
     green = parseInt(color.substr(3,2), 16)
     blue = parseInt(color.substr(5,2), 16)
-    writeOnCharacteristic(power, brightness, red, green, blue);
+    writeOnCharacteristic(power, red, green, blue);
 })
 
 // redSlider.addEventListener('input', (event) => {
@@ -149,12 +149,12 @@ function handleCharacteristicChange(event){
     retrievedValue.innerHTML = newValueReceived;
 }
 
-function writeOnCharacteristic(power, brightness){
+function writeOnCharacteristic(power){
     if (bleServer && bleServer.connected) {
         bleServiceFound.getCharacteristic(ledCharacteristic)
         .then(characteristic => {
             console.log("Found the LED characteristic: ", characteristic.uuid);
-            const data = new Uint8Array([power, brightness, red, green, blue]);
+            const data = new Uint8Array([power, red, green, blue]);
             return characteristic.writeValue(data);
         })
         .then(() => {

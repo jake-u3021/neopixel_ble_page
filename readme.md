@@ -1,0 +1,1 @@
+- update button accessibilities based on current values on the esp32

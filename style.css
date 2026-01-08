@@ -62,3 +62,16 @@ button {
 .reading {
     font-size: 1.8rem;
 }
+
+button:disabled,
+button[disabled] {
+  background-color: #cccccc; /* Custom background color */
+  color: #666666; /* Custom text color */
+  cursor: not-allowed; /* Change the cursor icon */
+  opacity: 0.7; /* Make it slightly transparent */
+}
+
+button:enabled {
+  /* Styles for the normal, enabled state */
+  cursor: pointer;
+}

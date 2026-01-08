@@ -44,12 +44,12 @@ disconnectButton.addEventListener('click', disconnectDevice);
 // Write to the ESP32 LED Characteristic
 onButton.addEventListener('click', () => {
     power = 1;
-    writeOnCharacteristic(power, red, green, blue);
+    writeOnCharacteristic();
 });
 
 offButton.addEventListener('click', () => {
     power = 0;
-    writeOnCharacteristic(power, red, green, blue);
+    writeOnCharacteristic();
 });
 
 // brightnessSlider.addEventListener('input', (event) => {

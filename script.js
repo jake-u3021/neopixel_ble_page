@@ -5,6 +5,7 @@ const onButton = document.getElementById('onButton');
 const offButton = document.getElementById('offButton');
 const retrievedValue = document.getElementById('valueContainer');
 const bleStateContainer = document.getElementById('bleState');
+const powerStatusContainer = document.getElementById('powerStatusContainer');
 
 // const brightnessSlider = document.getElementById('brightnessSlider');
 const colourSelect = document.getElementById('colourSelect');
@@ -21,8 +22,9 @@ var blue = 100;
 //Define BLE Device Specs
 var deviceName ='ESP32';
 var bleService = '19b10000-e8f2-537e-4f6c-d104768a1214';
-var ledCharacteristic = '19b10002-e8f2-537e-4f6c-d104768a1214';
 var sensorCharacteristic= '19b10001-e8f2-537e-4f6c-d104768a1214';
+var ledCharacteristic = '19b10002-e8f2-537e-4f6c-d104768a1214';
+
 
 //Global Variables to Handle Bluetooth
 var bleServer;
@@ -63,7 +65,7 @@ colourSelect.addEventListener('input', (event) => {
     red = parseInt(color.substr(1,2), 16)
     green = parseInt(color.substr(3,2), 16)
     blue = parseInt(color.substr(5,2), 16)
-    writeOnCharacteristic(power, red, green, blue);
+    writeOnCharacteristic();
 })
 
 // redSlider.addEventListener('input', (event) => {
@@ -149,7 +151,7 @@ function handleCharacteristicChange(event){
     retrievedValue.innerHTML = newValueReceived;
 }
 
-function writeOnCharacteristic(power){
+function writeOnCharacteristic(){
     if (bleServer && bleServer.connected) {
         bleServiceFound.getCharacteristic(ledCharacteristic)
         .then(characteristic => {

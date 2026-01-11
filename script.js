@@ -52,14 +52,6 @@ offButton.addEventListener('click', () => {
     writeOnCharacteristic();
 });
 
-// brightnessSlider.addEventListener('input', (event) => {
-//     brightness = event.target.value;
-//     console.log("brightness", brightness);
-//     writeOnCharacteristic(power, brightness, red, green, blue);
-// });
-
-// rgb
-
 colourSelect.addEventListener('input', (event) => {
     const color = event.target.value
     red = parseInt(color.substr(1,2), 16)
@@ -67,21 +59,6 @@ colourSelect.addEventListener('input', (event) => {
     blue = parseInt(color.substr(5,2), 16)
     writeOnCharacteristic();
 })
-
-// redSlider.addEventListener('input', (event) => {
-//     red = event.target.value;
-//     writeOnCharacteristic(power, brightness, red, green, blue);
-// });
-
-// greenSlider.addEventListener('input', (event) => {
-//     green = event.target.value;
-//     writeOnCharacteristic(power, brightness, red, green, blue);
-// });
-
-// blueSlider.addEventListener('input', (event) => {
-//     blue = event.target.value;
-//     writeOnCharacteristic(power, brightness, red, green, blue);
-// });
 
 // Check if BLE is available in your Browser
 function isWebBluetoothEnabled() {

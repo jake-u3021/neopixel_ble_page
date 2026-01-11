@@ -3,15 +3,9 @@ const connectButton = document.getElementById('connectBleButton');
 const disconnectButton = document.getElementById('disconnectBleButton');
 const onButton = document.getElementById('onButton');
 const offButton = document.getElementById('offButton');
-const retrievedValue = document.getElementById('valueContainer');
 const bleStateContainer = document.getElementById('bleState');
 const powerStatusContainer = document.getElementById('powerStatusContainer');
-
-// const brightnessSlider = document.getElementById('brightnessSlider');
 const colourSelect = document.getElementById('colourSelect');
-// const redSlider = document.getElementById('redSlider');
-// const greenSlider = document.getElementById('greenSlider');
-// const blueSlider = document.getElementById('blueSlider');
 
 var power = 0;
 // var brightness = 50;
@@ -104,10 +98,12 @@ function connectToDevice(){
         return characteristic.readValue();
     })
     .then(value => {
-        console.log("Read value: ", value);
-        const decodedValue = new TextDecoder().decode(value);
-        console.log("Decoded value: ", decodedValue);
-        retrievedValue.innerHTML = decodedValue;
+        const powerState = value.getUint8(0);
+        const r = value.getUint8(1);
+        const g = value.getUint8(2);
+        const b = value.getUint8(3);
+
+        updateUIFromESP(powerState, r, g, b);
     })
     .catch(error => {
         console.log('Error: ', error);
@@ -119,13 +115,18 @@ function onDisconnected(event){
     bleStateContainer.innerHTML = "Device disconnected";
     bleStateContainer.style.color = "#d13a30";
 
-    connectToDevice();
+    // connectToDevice();
 }
 
 function handleCharacteristicChange(event){
-    const newValueReceived = new TextDecoder().decode(event.target.value);
-    console.log("Characteristic value changed: ", newValueReceived);
-    retrievedValue.innerHTML = newValueReceived;
+    const value = event.target.value;
+
+    const powerState = value.getUint8(0);
+    const r = value.getUint8(1);
+    const g = value.getUint8(2);
+    const b = value.getUint8(3);
+
+    updateUIFromESP(powerState, r, g, b);
 }
 
 function writeOnCharacteristic(){
@@ -146,6 +147,26 @@ function writeOnCharacteristic(){
         console.error ("Bluetooth is not connected. Cannot write to characteristic.")
         window.alert("Bluetooth is not connected. Cannot write to characteristic. \n Connect to BLE first!")
     }
+}
+
+function updateUIFromESP(powerState, r, g, b) {
+    power = powerState;
+    red = r;
+    green = g;
+    blue = b;
+
+    // Power UI
+    powerStatusContainer.innerText = power ? "ON" : "OFF";
+    powerStatusContainer.style.color = power ? "#24af37" : "#d13a30";
+
+    // Colour picker sync
+    const hex =
+      "#" +
+      red.toString(16).padStart(2, "0") +
+      green.toString(16).padStart(2, "0") +
+      blue.toString(16).padStart(2, "0");
+
+    colourSelect.value = hex;
 }
 
 function disconnectDevice() {
@@ -175,23 +196,4 @@ function disconnectDevice() {
         window.alert("Bluetooth is not connected.")
     }
 }
-
-// custom
-// function writeBrightness(value) {
-//     if (bleServer && bleServer.connected) {
-//         bleServiceFound.getCharacteristic(ledCharacteristic)
-//         .then(characteristic => {
-
-//         })
-//         .then(() => {
-//             console.log("Value written to LEDcharacteristic:", value);
-//         })
-//         .catch(error => {
-//             console.error("Error writing to the LED characteristic: ", error);
-//         });
-//     } else {
-//         console.error ("Bluetooth is not connected. Cannot write to characteristic.")
-//         window.alert("Bluetooth is not connected. Cannot write to characteristic. \n Connect to BLE first!")
-//     }
-// }
 

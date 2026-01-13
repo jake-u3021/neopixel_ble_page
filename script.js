@@ -51,6 +51,11 @@ colourSelect.addEventListener('input', (event) => {
     red = parseInt(color.substr(1,2), 16)
     green = parseInt(color.substr(3,2), 16)
     blue = parseInt(color.substr(5,2), 16)
+    
+    // if (!ledCharacteristicFound) return;
+
+    // const data = new Uint8Array([power, red, green, blue]);
+    // ledCharacteristicFound.writeValue(data);
     writeOnCharacteristic();
 })
 
@@ -129,7 +134,7 @@ function handleCharacteristicChange(event){
     updateUIFromESP(powerState, r, g, b);
 }
 
-function writeOnCharacteristic(){
+function writeOnCharacteristic(){  // js -> cpp
     if (bleServer && bleServer.connected) {
         bleServiceFound.getCharacteristic(ledCharacteristic)
         .then(characteristic => {

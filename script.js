@@ -7,6 +7,11 @@ const bleStateContainer = document.getElementById('bleState');
 const powerStatusContainer = document.getElementById('powerStatusContainer');
 const colourSelect = document.getElementById('colourSelect');
 
+const singlePowerRadio = document.getElementById('singlePowerRadio');
+const dualPowerRadio = document.getElementById('dualPowerRadio');
+const singleColourRadio = document.getElementById('singleColourRadio');
+const dualColourRadio = document.getElementById('dualColourRadio');
+
 var power = 0;
 // var brightness = 50;
 var red = 100;
@@ -107,6 +112,11 @@ function connectToDevice(){
         const r = value.getUint8(1);
         const g = value.getUint8(2);
         const b = value.getUint8(3);
+
+        singlePowerRadio.disabled = false;
+        dualPowerRadio.disabled = false;
+        singleColourRadio.disabled = false;
+        dualColourRadio.disabled = false;
 
         updateUIFromESP(powerState, r, g, b);
     })

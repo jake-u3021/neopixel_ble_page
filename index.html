@@ -18,28 +18,41 @@
             <p class="gray-label">BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
         </div>
     </div>
+
     <div class="card-grid">
         <div class="card">
             <h2>Power</h2>
+
+            <p>Control mode:
+            <br>
+            <input type="radio" id="singlePowerRadio" name="powerControlMode" value="single" disabled>
+            <label for="html">Single</label>
+            <br>
+            <input type="radio" id="dualPowerRadio" name="powerControlMode" value="dual" disabled>
+            <label for="css">Dual</label>
+            </p>
+
             <p>Current status: <span id="powerStatusContainer">NaN</span></p>
             <button id="onButton" class="connectButton">ON</button>
             <button id="offButton" class="disconnectButton">OFF</button>  
+            
         </div>
         <div class="card">
             <h2>Colour</h2>
-            <!-- <input type="range" id="brightnessSlider" min="0" max="100" value="50"/>  -->
+            
+            <p>Control mode:
+            <br>
+            <input type="radio" id="singleColourRadio" name="colourControlMode" value="single" disabled>
+            <label for="html">Single</label>
+            <br>
+            <input type="radio" id="dualColourRadio" name="colourControlMode" value="dual" disabled>
+            <label for="css">Dual</label>
+            </p>
+
             <input type="color" id="colourSelect" value="#646464"/>
         </div>
     </div>
-    <!-- <h2>Fetched Value</h2>
-    <p><span id="valueContainer">NaN</span></p> -->
-    
-    <!-- <h2>Red</h2>
-    <input type="range" id="redSlider" min="0" max="255" value="0"/>
-    <h2>Green</h2>
-    <input type="range" id="greenSlider" min="0" max="255" value="0"/>
-    <h2>Blue</h2>
-    <input type="range" id="blueSlider" min="0" max="255" value="0"/>  -->
+
     <script src="script.js"></script>
 </body>
 </html>

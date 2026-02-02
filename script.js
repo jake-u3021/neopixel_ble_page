@@ -8,9 +8,9 @@ const powerStatusContainer = document.getElementById('powerStatusContainer');
 const colourSelect = document.getElementById('colourSelect');
 
 const singlePowerRadio = document.getElementById('singlePowerRadio');
-const dualPowerRadio = document.getElementById('dualPowerRadio');
+const globalPowerRadio = document.getElementById('globalPowerRadio');
 const singleColourRadio = document.getElementById('singleColourRadio');
-const dualColourRadio = document.getElementById('dualColourRadio');
+const globalColourRadio = document.getElementById('globalColourRadio');
 
 var power = 0;
 // var brightness = 50;
@@ -114,9 +114,9 @@ function connectToDevice(){
         const b = value.getUint8(3);
 
         singlePowerRadio.disabled = false;
-        dualPowerRadio.disabled = false;
+        globalPowerRadio.disabled = false;
         singleColourRadio.disabled = false;
-        dualColourRadio.disabled = false;
+        globalColourRadio.disabled = false;
 
         updateUIFromESP(powerState, r, g, b);
     })

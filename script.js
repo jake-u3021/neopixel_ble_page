@@ -7,11 +7,15 @@ const bleStateContainer = document.getElementById('bleState');
 const powerStatusContainer = document.getElementById('powerStatusContainer');
 const colourSelect = document.getElementById('colourSelect');
 
-const singlePowerRadio = document.getElementById('singlePowerRadio');
-const globalPowerRadio = document.getElementById('globalPowerRadio');
-const singleColourRadio = document.getElementById('singleColourRadio');
-const globalColourRadio = document.getElementById('globalColourRadio');
+const singleNavPill = document.getElementById('singleNavPill');
+const globalNavPill = document.getElementById('globalNavPill');
 
+// const singlePowerRadio = document.getElementById('singlePowerRadio');
+// const globalPowerRadio = document.getElementById('globalPowerRadio');
+// const singleColourRadio = document.getElementById('singleColourRadio');
+// const globalColourRadio = document.getElementById('globalColourRadio');
+
+var controlMode = 0; // 0 - single, 1 - global
 var power = 0;
 // var brightness = 50;
 var red = 100;
@@ -64,6 +68,20 @@ colourSelect.addEventListener('input', (event) => {
     writeOnCharacteristic();
 })
 
+singleNavPill.addEventListener('click', (event) => {
+    console.log('Single control mode');
+    event.preventDefault();
+    setActiveNavPill(singleNavPill);
+});
+
+globalNavPill.addEventListener('click', (event) => {
+    console.log('Global control mode');
+    event.preventDefault();
+    setActiveNavPill(globalNavPill);
+});
+
+
+
 // Check if BLE is available in your Browser
 function isWebBluetoothEnabled() {
     if (!navigator.bluetooth) {
@@ -113,10 +131,10 @@ function connectToDevice(){
         const g = value.getUint8(2);
         const b = value.getUint8(3);
 
-        singlePowerRadio.disabled = false;
-        globalPowerRadio.disabled = false;
-        singleColourRadio.disabled = false;
-        globalColourRadio.disabled = false;
+        // singlePowerRadio.disabled = false;
+        // globalPowerRadio.disabled = false;
+        // singleColourRadio.disabled = false;
+        // globalColourRadio.disabled = false;
 
         updateUIFromESP(powerState, r, g, b);
     })
@@ -212,3 +230,8 @@ function disconnectDevice() {
     }
 }
 
+function setActiveNavPill(activeNavPill) {
+    singleNavPill.classList.remove("active");
+    globalNavPill.classList.remove("active");
+    activeNavPill.classList.add("active");
+}

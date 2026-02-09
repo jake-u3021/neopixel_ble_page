@@ -16,8 +16,8 @@
     </nav>
 
     <div>
-        <button id="connectBleButton" class="connectButton"> Connect Device</button>
-        <button id="disconnectBleButton" class="disconnectButton"> Disconnect Device</button>
+        <button id="connectBleButton" class="connectButton btn btn-success"> Connect Device</button>
+        <button id="disconnectBleButton" class="disconnectButton btn btn-danger"> Disconnect Device</button>
         <p class="gray-label">Connection state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
     </div>
 
@@ -25,15 +25,24 @@
         <a id="singleNavPill" class="nav-item nav-link active" href="#">Single</a>
         <a id="globalNavPill" class="nav-item nav-link" href="#">Global</a>
     </nav>
-    
+
     <div class="card-grid">
-        <div class="card">
+        <!-- <div class="card">
             <p>Current status: <span id="powerStatusContainer">NaN</span></p>
             <button id="onButton" class="connectButton">ON</button>
             <button id="offButton" class="disconnectButton">OFF</button>  
             
+        </div> -->
+
+        <div class="container">
+            <button id="powerButton" aria-pressed="false" class="power-btn" disabled></button>
         </div>
-        <div class="card">
+
+        <div class="container">
+            <input type="color" id="colourSelect" value="#646464"/>
+        </div>
+
+        <!-- <div class="card">
             <h2>Colour</h2>
 
             <div style="display:flex; gap:20px; align-items:center;">
@@ -50,13 +59,13 @@
             <label for="css">Global</label>
             </p>
 
-            <input type="color" id="colourSelect" value="#646464"/>
-        </div>
+            
+        </div> -->
     </div>
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
     <script src="script.js"></script>
-    <script src="colour-wheel.js"></script>
+    <!-- <script src="colour-wheel.js"></script> -->
 </body>
 </html>

@@ -1,14 +1,15 @@
 // DOM Elements
 const connectButton = document.getElementById('connectBleButton');
 const disconnectButton = document.getElementById('disconnectBleButton');
-const onButton = document.getElementById('onButton');
-const offButton = document.getElementById('offButton');
+// const onButton = document.getElementById('onButton');
+// const offButton = document.getElementById('offButton');
 const bleStateContainer = document.getElementById('bleState');
-const powerStatusContainer = document.getElementById('powerStatusContainer');
+// const powerStatusContainer = document.getElementById('powerStatusContainer');
 const colourSelect = document.getElementById('colourSelect');
 
 const singleNavPill = document.getElementById('singleNavPill');
 const globalNavPill = document.getElementById('globalNavPill');
+const powerButton = document.getElementById('powerButton');
 
 // const singlePowerRadio = document.getElementById('singlePowerRadio');
 // const globalPowerRadio = document.getElementById('globalPowerRadio');
@@ -45,15 +46,15 @@ connectButton.addEventListener('click', (event) => {
 disconnectButton.addEventListener('click', disconnectDevice);
 
 // Write to the ESP32 LED Characteristic
-onButton.addEventListener('click', () => {
-    power = 1;
-    writeOnCharacteristic();
-});
+// onButton.addEventListener('click', () => {
+//     power = 1;
+//     writeOnCharacteristic();
+// });
 
-offButton.addEventListener('click', () => {
-    power = 0;
-    writeOnCharacteristic();
-});
+// offButton.addEventListener('click', () => {
+//     power = 0;
+//     writeOnCharacteristic();
+// });are 
 
 colourSelect.addEventListener('input', (event) => {
     const color = event.target.value
@@ -80,6 +81,20 @@ globalNavPill.addEventListener('click', (event) => {
     setActiveNavPill(globalNavPill);
 });
 
+powerButton.addEventListener('click', () => {
+    console.log("Power button clicked...");
+
+    if (power == 0) {
+        power = 1;
+    } else if (power == 1) {
+        power = 0;
+    }
+
+    console.log("Power is now", power);
+
+    updateValUI(power, red, green, blue);
+    writeOnCharacteristic();
+});
 
 
 // Check if BLE is available in your Browser
@@ -136,7 +151,8 @@ function connectToDevice(){
         // singleColourRadio.disabled = false;
         // globalColourRadio.disabled = false;
 
-        updateUIFromESP(powerState, r, g, b);
+        powerButton.disabled = false;
+        updateValUI(powerState, r, g, b);
     })
     .catch(error => {
         console.log('Error: ', error);
@@ -147,7 +163,7 @@ function onDisconnected(event){
     console.log('Device Disconnected:', event.target.device.name);
     bleStateContainer.innerHTML = "Device disconnected";
     bleStateContainer.style.color = "#d13a30";
-
+    powerButton.disabled = true;
     // connectToDevice();
 }
 
@@ -159,7 +175,7 @@ function handleCharacteristicChange(event){
     const g = value.getUint8(2);
     const b = value.getUint8(3);
 
-    updateUIFromESP(powerState, r, g, b);
+    updateValUI(powerState, r, g, b);
 }
 
 function writeOnCharacteristic(){  // js -> cpp
@@ -182,24 +198,31 @@ function writeOnCharacteristic(){  // js -> cpp
     }
 }
 
-function updateUIFromESP(powerState, r, g, b) {
+function updateValUI(powerState, r, g, b) {
     power = powerState;
     red = r;
     green = g;
     blue = b;
 
     // Power UI
-    powerStatusContainer.innerText = power ? "ON" : "OFF";
-    powerStatusContainer.style.color = power ? "#24af37" : "#d13a30";
+    // powerStatusContainer.innerText = power ? "ON" : "OFF";
+    // powerStatusContainer.style.color = power ? "#24af37" : "#d13a30";
+
+    // Power button sync
+    if (power == 1) {
+        powerButton.ariaPressed = "true";
+    } else {
+        powerButton.ariaPressed = "false";
+    }
 
     // Colour picker sync
-    const hex =
-      "#" +
-      red.toString(16).padStart(2, "0") +
-      green.toString(16).padStart(2, "0") +
-      blue.toString(16).padStart(2, "0");
+    // const hex =
+    //   "#" +
+    //   red.toString(16).padStart(2, "0") +
+    //   green.toString(16).padStart(2, "0") +
+    //   blue.toString(16).padStart(2, "0");
 
-    colourSelect.value = hex;
+    // colourSelect.value = hex;
 }
 
 function disconnectDevice() {

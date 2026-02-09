@@ -29,14 +29,6 @@ body {
     background-color: white;
     box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
 }
-button {
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-}
 
 .onButton{
     background-color: #00eaff;
@@ -44,14 +36,6 @@ button {
 
 .offButton{
     background-color: #5f6c6d;
-}
-
-.connectButton{
-    background-color: #24af37;
-}
-
-.disconnectButton{
-    background-color: #d13a30;
 }
 
 .gray-label {
@@ -63,23 +47,55 @@ button {
     font-size: 1.8rem;
 }
 
-button:disabled,
-button[disabled] {
-  background-color: #cccccc; /* Custom background color */
-  color: #666666; /* Custom text color */
-  cursor: not-allowed; /* Change the cursor icon */
-  opacity: 0.7; /* Make it slightly transparent */
-}
-
-button:enabled {
-  /* Styles for the normal, enabled state */
-  cursor: pointer;
-}
-
 .navbar-title {
     color: white;
 }
 
 .navbar {
     color: black;
+}
+
+.container {
+    display: flex; /* Enables Flexbox layout */
+    justify-content: center; /* Centers children horizontally along the main axis */
+}
+
+/* BUTTON */
+.power-btn {
+    width: 64px;
+    height: 64px;
+    background: url("powerButton.png") center/contain no-repeat;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+}
+
+/* OFF – red */
+.power-btn[aria-pressed="false"] {
+    opacity: 0.5;
+    filter: 
+        grayscale(100%) 
+        brightness(0.6);
+}
+
+/* ON – green */
+.power-btn[aria-pressed="true"] {
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(50%)
+        sepia(100%)
+        saturate(5000%)
+        hue-rotate(90deg);
+}
+
+/* DISABLED – overrides everything */
+.power-btn:disabled,
+.power-btn:disabled[aria-pressed="false"],
+.power-btn:disabled[aria-pressed="true"] {
+    background-color: transparent;
+    filter: grayscale(100%) brightness(0.6);
+    opacity: 0.2;
+    cursor: not-allowed;
+    pointer-events: none;
 }

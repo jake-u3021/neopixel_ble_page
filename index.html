@@ -9,63 +9,25 @@
 </head>
 <body>
 
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <div class="container-fluid justify-content-center">
             <h1 class="navbar-title text-white m-0">Lighting Control</h1>
         </div>
-    </nav> -->
+    </nav>
+
+    <div>
+        <button id="connectBleButton" class="connectButton"> Connect Device</button>
+        <button id="disconnectBleButton" class="disconnectButton"> Disconnect Device</button>
+        <p class="gray-label">Connection state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
+    </div>
 
     <nav class="nav nav-pills nav-justified">
         <a id="singleNavPill" class="nav-item nav-link active" href="#">Single</a>
         <a id="globalNavPill" class="nav-item nav-link" href="#">Global</a>
     </nav>
-
-    <!-- <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Single</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Global</a>
-        </li>
-    </ul> -->
-
-    <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Single</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Global</button>
-        </li>
-    </ul> -->
-
-    <div>
-        Hue: <span id="hueText">0</span>°
-        Brightness: <span id="valText">100</span>%
-    </div>
-
+    
     <div class="card-grid">
         <div class="card">
-            <p>
-                <button id="connectBleButton" class="connectButton"> Connect to BLE Device</button>
-                <button id="disconnectBleButton" class="disconnectButton"> Disconnect BLE Device</button>
-            </p>
-            <p class="gray-label">BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
-        </div>
-    </div>
-
-    <div class="card-grid">
-        <div class="card">
-            <h2>Power</h2>
-
-            <p>Control mode:
-            <br>
-            <input type="radio" id="singlePowerRadio" name="powerControlMode" value="single" disabled>
-            <label for="html">Single</label>
-            <br>
-            <input type="radio" id="globalPowerRadio" name="powerControlMode" value="global" disabled>
-            <label for="css">Global</label>
-            </p>
-
             <p>Current status: <span id="powerStatusContainer">NaN</span></p>
             <button id="onButton" class="connectButton">ON</button>
             <button id="offButton" class="disconnectButton">OFF</button>  

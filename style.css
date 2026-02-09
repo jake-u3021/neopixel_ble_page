@@ -1,3 +1,12 @@
+:root {
+    --bg-colour: #262626;
+    --green-btn-colour: #00FF00;
+    --red-btn-colour: #FF0000;
+
+  /* --green-btn-colour: #408559;
+  --red-btn-colour: #cb444a; */
+}
+
 html {
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
@@ -47,18 +56,30 @@ body {
     font-size: 1.8rem;
 }
 
-.navbar-title {
-    color: white;
-}
 
-.navbar {
-    color: black;
+
+body {
+    background-color: var(--bg-colour);
 }
 
 .container {
     display: flex; /* Enables Flexbox layout */
     justify-content: center; /* Centers children horizontally along the main axis */
 }
+
+.connectButton {
+    background-color: var(--bg-colour); 
+    color: var(--green-btn-colour); 
+    border: none;         
+}
+
+.disconnectButton {
+    background-color: var(--bg-colour); 
+    color: var(--red-btn-colour);  
+    border: none;
+}
+
+
 
 /* BUTTON */
 .power-btn {
